@@ -1,0 +1,218 @@
+<!DOCTYPE html >
+<html>
+  <head lang="es">
+    <title>AHORCADO</title>
+  </head charset="utf-8">
+  <body>
+    
+  </br>
+  </br>
+  </br>
+     <link rel="stylesheet" href="john.css">
+     <H1 id="color" align="center">INTENTOS RESTANTES:<span id="intentos">10</span></H1>
+   <div align ="center">
+      <input 
+      class="class2"
+      type="password"
+      id="text"
+      name="text">
+
+
+      <input
+      class="class1"
+          type="submit"
+          id="enviar"
+          value="ok"
+          onclick="hola('text')"
+          
+        />
+        <br>
+        
+
+        <button id="btnReiniciar" onclick="reiniciar()" class="class5">START AGAIN</button>
+   </div>
+
+    <div  class="a" align="center">
+      <input id="letra" maxlength="1" type="text"/>
+
+    </div>
+ 
+
+
+
+
+   
+      <div style="margin-top: -100px; z-index: 100;">
+        <canvas   width="700" height="600" id="dibujito"></canvas>
+      </div>
+   
+      <script  src = FuncionPintar.js></script>
+      <script src = Rectangulo.js></script>
+      <script src = Palo.js></script>
+
+      
+      
+        <div align="center" id="palabras" class="letras" ></div>
+
+  </body>
+  <script>
+
+    var palabra_sin_espacios ="";
+    var _errores =0;
+    var _correctas=0;
+
+    function reiniciar()
+    {
+      window.location.reload()
+    }
+
+
+   function hola(id)
+   {
+     _errores=0;
+     console.log(document.getElementById(id).value)
+     palabra_sin_espacios = eliminar_espacios(document.getElementById(id).value)
+     console.log(palabra_sin_espacios)
+     
+      var inputs="";
+     for(i=0;i<palabra_sin_espacios.length;i++)
+     {
+       
+       
+       inputs+="<input type='text' maxlength='1' disabled id='caja"+i+"' />"
+
+     }
+     document.getElementById("palabras").innerHTML=inputs;
+   }
+
+
+   function eliminar_espacios(texto)
+   {
+     var textoSinEspacios ="";//GUARDA EL NUEVO TEXTO SIN ESPACIOS
+     for(i=0;i<texto.length;i++)//RECORE LAS LETRAS Y CAMBIA LOS ESPACIOS POR NADA 
+     {
+       if(texto[i]!==" ")//ENCUENTRAS LOS ESPACIOS Y LOS ELIMINA 
+       {
+         textoSinEspacios +=texto[i]//CONCATENAMOS ES TEXTO CON EL ANTERIOR 
+       }
+     }
+     return textoSinEspacios ;//RETORNAMOS EL TEXTO
+   }
+
+
+
+ document.getElementById("letra").addEventListener("change",async function ()
+ {
+   var letra_especial =document.getElementById("letra").value
+   console.log(letra_especial)
+   document.getElementById("letra").value=null
+   var banderaErrores=true;
+   for(i=0;i<palabra_sin_espacios.length;i++)
+     {
+       if(palabra_sin_espacios[i]===letra_especial)
+       {
+         banderaErrores=false;
+         
+         if(document.getElementById("caja"+i).value=="")
+         {
+           document.getElementById("caja"+i).value=letra_especial
+           _correctas=parseInt(_correctas)+parseInt(1)
+         }
+       
+         if(_correctas==palabra_sin_espacios.length)
+         {
+           setTimeout(function(){alert("you are the winer")},1000)
+           document.getElementById("btnReiniciar").style.display="block"
+         }
+         
+       }
+     }
+     if(banderaErrores)
+     {
+       _errores=parseInt(_errores)+parseInt(1)
+       document.getElementById("intentos").innerText=parseInt(document.getElementById("intentos").innerText)-1
+     
+     if(_errores===1)
+     {
+       //cabeza
+      dibujarlinea("black", 550, 300, 510, 320);
+      dibujarlinea("black", 510, 320, 510, 370);
+      dibujarlinea("black", 550, 300, 590, 320);
+      dibujarlinea("black", 590, 320, 590, 370);
+      dibujarlinea("black", 510, 370, 550, 380);
+      dibujarlinea("black", 590, 370, 550, 380);
+      dibujarlinea("black", 550, 300, 540, 299);
+      dibujarlinea("black", 550, 300, 550, 299);
+      dibujarlinea("black", 550, 300, 560, 299);
+     }
+        if(_errores===2)
+     {
+       //cuerpo
+      dibujarlinea("black", 550, 380, 550, 480);
+     }
+        if(_errores===3)
+     {
+       //pierna01
+      dibujarlinea("black", 550, 480, 520, 520);
+      dibujarlinea("black", 520, 520, 510, 520);
+     }
+        if(_errores===4)
+     {
+       //pierna02
+      dibujarlinea("black", 550, 480, 580, 520);
+      dibujarlinea("black", 580, 520, 590, 520);
+
+     }
+        if(_errores===5)
+     {
+       document.getElementById("color").style.color="#FFD155"
+       //braso01
+      dibujarlinea("black", 550, 410, 580, 440);
+      dibujarlinea("black", 580, 440, 600, 420);
+      dibujarlinea("black", 600, 420, 600, 410);
+      dibujarlinea("black", 600, 420, 610, 420);
+     }
+        if(_errores===6)
+     {
+       //braso02
+      dibujarlinea("black", 550, 410, 510, 450);
+      dibujarlinea("black", 510, 450, 500, 450);
+      dibujarlinea("black", 510, 450, 510, 460);
+     }
+        if(_errores===7)
+     {
+       //ojo01
+      dibujarlinea("black", 530, 330, 530, 340);
+     }
+        if(_errores===8)
+     {
+       document.getElementById("color").style.color="#FF5555"
+       //ojo02
+     dibujarlinea("black", 570, 330, 570, 340);
+     }
+        if(_errores===9)
+     {
+       //nariz
+      dibujarlinea("black", 550, 350, 540, 360);
+      dibujarlinea("black", 540, 360, 550, 360);
+
+     }
+        if(_errores===10)
+     {
+       //boca
+      await dibujarlinea("black", 540, 370, 560, 370);
+      setTimeout(function(){alert("game over")},1000)
+      document.getElementById("btnReiniciar").style.display="block"
+     }
+     }
+     
+     console.log(_errores)
+
+     
+ }
+ )
+
+
+
+  </script>
+</html>

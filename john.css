@@ -1,0 +1,39 @@
+.class1 {
+  font-size: 60px;
+}
+.class2 {
+  font-size: 60px;
+}
+.letras {
+  margin-top: 50px;
+}
+.letras input {
+  height: 50px;
+  width: 35px;
+  font-size: 40px;
+  margin-right: 20px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.a {
+  margin-top: 20px;
+}
+.a input {
+  height: 40px;
+  width: 40px;
+  font-size: 30px;
+  text-align: center;
+  z-index: 1000;
+}
+
+h1
+{
+    font-family: Arial;
+}
+.class5
+{
+    display: none;
+    margin-top: 20px;
+    font-size: 51px;
+}
